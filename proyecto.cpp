@@ -107,8 +107,9 @@ void menu() {
 		case 4:
 			mostrarInfoDepartamento();
 		case 5:
-			cout << "Ingrese el dui: "; cin >> dui; cout << endl;
 			cout << "Ingrese el departamento: "; cin >> departament; cout << endl;
+			cout << "Ingrese el dui: "; cin >> dui; cout << endl;
+			
 			BuscarPorDepartamento(lista, dui, departament);
 			break;
 		default:
