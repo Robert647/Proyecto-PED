@@ -26,6 +26,7 @@ int main();
 
 void InsertarInfo(Nodo*&, string, string, int, string, int, string);
 void buscar(Nodo*, int);
+void BuscarPorDepartamento(Nodo*&, int, string);
 void eliminar(Nodo*&, int);
 void menu();
 void menuMunicipios();
@@ -71,11 +72,17 @@ void menu() {
 			break;
 		case 4:
 			mostrarInfoDepartamento();
+		case 5:
+			string departament;
+			cout << "Ingrese el dui: "; cin >> dui; cout << endl;
+			cout << "Ingrese el departamento: "; cin >> departament; cout << endl;
+			BuscarPorDepartamento(lista, dui, departament);
 			break;
 		default:
 			break;
 		}
-	} while (opcion != 5);
+
+	} while (opcion != 6);
 
 }
 
