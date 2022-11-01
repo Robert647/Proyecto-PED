@@ -21,12 +21,46 @@ struct Nodo {
 	string sexo;
 	Nodo* siguiente;
 };
+string departamentos[14] = { "Ahuachapan","Sonsonate","Santa Ana","Chalatenango", "La libertad","Cuscatlan","San Salvador","La paz","Cabanas","San vicente","Uzulutan","San miguel","Morazan","La union" };
 
 int main();
 
 void InsertarInfo(Nodo*&, string, string, int, string, int, string);
 void buscar(Nodo*, int);
-void BuscarPorDepartamento(Nodo*&, int, string);
+void BuscarPorDepartamento(Nodo* lista, int dui, string departamento) {
+	bool band = false;
+
+	Nodo* actual = new Nodo();
+	actual = lista;
+
+	while ((actual != NULL) && (actual->DUI <= dui))
+	{
+		if (
+			(
+				departamento == departamentos[0] || departamento == departamentos[1] || departamento == departamentos[2] ||
+				departamento == departamentos[3] || departamento == departamentos[4] || departamento == departamentos[5] ||
+				departamento == departamentos[6] || departamento == departamentos[8] || departamento == departamentos[9] ||
+				departamento == departamentos[10] || departamento == departamentos[11] || departamento == departamentos[12] ||
+				departamento == departamentos[13]
+				) && actual->DUI == dui
+			) {
+			band = true;
+			break;
+		}
+		actual = actual->siguiente;
+	}
+
+	if (band == true)
+	{
+		cout << "Numero de DUI: " << dui << " encontrado. " << endl;
+		cout << "Departamento: " << lista->departamento << endl;
+		cout << "Municipio: " << lista->municipio << endl;
+		cout << "Nombre: " << lista->nombre << endl;
+	}
+	else {
+		cout << "Numero de DUI: " << dui << " no encontrado." << endl;
+	}
+}
 void eliminar(Nodo*&, int);
 void menu();
 void menuMunicipios();
@@ -34,7 +68,6 @@ void mostrarInfoDepartamento();
 
 Nodo* lista = NULL;
 
-string departamentos[14] = { "Ahuachapan","Sonsonate","Santa Ana","Chalatenango", "La liberta","Cuscatlan","San Salvador","La paz","Cabanas","San vicente","Uzulutan","San miguel","Morazan","la union" };
 
 int main() {
 	menu();
@@ -43,6 +76,7 @@ int main() {
 
 void menu() {
 	int opcion, dui;
+	string departament;
 	do {
 		cout << "==============MENU DE OPCIONES=================" << endl;
 		cout << "1 - Aniadir nueva persona a lista. " << endl;
@@ -73,7 +107,6 @@ void menu() {
 		case 4:
 			mostrarInfoDepartamento();
 		case 5:
-			string departament;
 			cout << "Ingrese el dui: "; cin >> dui; cout << endl;
 			cout << "Ingrese el departamento: "; cin >> departament; cout << endl;
 			BuscarPorDepartamento(lista, dui, departament);
@@ -431,40 +464,7 @@ void buscar(Nodo* lista, int dui) {
 	}
 }
 
-void BuscarPorDepartamento(Nodo* lista, int dui, string departamento) {
-	bool band = false;
 
-	Nodo* actual = new Nodo();
-	actual = lista;
-
-	while ((actual != NULL) && (actual->DUI <= dui))
-	{
-		if (
-			(
-				departamento == departamentos[0] || departamento == departamentos[1] || departamento == departamentos[2] ||
-				departamento == departamentos[3] || departamento == departamentos[4] || departamento == departamentos[5] ||
-				departamento == departamentos[6] || departamento == departamentos[8] || departamento == departamentos[9] ||
-				departamento == departamentos[10] || departamento == departamentos[11] || departamento == departamentos[12] ||
-				departamento == departamentos[13]
-				) && actual->DUI == dui
-			) {
-			band = true;
-			break;
-		}
-		actual = actual->siguiente;
-	}
-
-	if (band == true)
-	{
-		cout << "Numero de DUI: " << dui << " encontrado. " << endl;
-		cout << "Departamento: " << lista->departamento << endl;
-		cout << "Municipio: " << lista->municipio << endl;
-		cout << "Nombre: " << lista->nombre << endl;
-	}
-	else {
-		cout << "Numero de DUI: " << dui << " no encontrado." << endl;
-	}
-}
 void eliminar(Nodo*& lista, int dui) {
 	if (lista != NULL)
 	{
